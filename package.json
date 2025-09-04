@@ -2,30 +2,28 @@
   "name": "zcw-lang",
   "version": "1.0.1",
   "description": "自定义DSL语言，后缀为zcw - TypeScript版本",
-  "type": "module",
   "main": "dist/index.js",
   "bin": {
-    "zcw": "dist/cli.js"
+    "zcw": "dist/zcw"
   },
   "files": [
-    "dist",
-    "packages/core/dist",
-    "packages/runtime/dist",
+    "dist/zcw",
     "README.md"
   ],
   "scripts": {
-    "build": "pnpm -r build && tsc",
+    "build": "pnpm -r build && tsc && pnpm bundle",
     "start": "node dist/index.js",
     "dev": "pnpm build && node dist/index.js",
     "test": "pnpm build && node dist/test.js",
     "clean": "pnpm -r clean && rm -rf dist",
     "install:all": "pnpm install",
     "prepublishOnly": "pnpm build",
-    "postinstall": "node dist/cli.js --version",
     "publish:patch": "npx tsx scripts/publish.ts patch",
     "publish:minor": "npx tsx scripts/publish.ts minor",
     "publish:major": "npx tsx scripts/publish.ts major",
-    "publish:prerelease": "npx tsx scripts/publish.ts prerelease"
+    "publish:prerelease": "npx tsx scripts/publish.ts prerelease",
+    "bundle": "esbuild src/cli.ts --bundle --platform=node --target=node16 --outfile=dist/zcw --format=cjs --external:node:*",
+    "bundle:win": "esbuild src/cli.ts --bundle --platform=node --target=node16 --outfile=dist/zcw.exe --format=esm --external:node:*"
   },
   "keywords": [
     "dsl",
@@ -42,6 +40,7 @@
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
+    "esbuild": "^0.25.9",
     "typescript": "^5.0.0"
   },
   "dependencies": {

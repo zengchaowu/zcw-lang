@@ -115,7 +115,7 @@ ZCW语言解释器 v1.0.0
 }
 
 // 如果直接运行此文件
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (require.main === module) {
   const cli = new ZCWCLI();
   cli.main().catch(console.error);
 }
