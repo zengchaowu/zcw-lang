@@ -16,6 +16,9 @@ export enum TokenType {
   LPAREN = 'LPAREN',
   RPAREN = 'RPAREN',
   SEMICOLON = 'SEMICOLON',
+  COMMA = 'COMMA',
+  LBRACKET = 'LBRACKET',
+  RBRACKET = 'RBRACKET',
   
   // 特殊
   EOF = 'EOF'
@@ -35,7 +38,8 @@ export enum ASTNodeType {
   METHOD = 'METHOD',
   IDENTIFIER = 'IDENTIFIER',
   STRING = 'STRING',
-  NUMBER = 'NUMBER'
+  NUMBER = 'NUMBER',
+  ARRAY = 'ARRAY'
 }
 
 export interface ASTNode {
@@ -49,4 +53,4 @@ export interface ZCWError extends Error {
   column?: number;
 }
 
-export type ZCWValue = string | number | boolean | null;
+export type ZCWValue = string | number | boolean | null | ZCWValue[];

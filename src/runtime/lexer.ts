@@ -204,6 +204,18 @@ export class Lexer {
           this.tokens.push(this.createToken(TokenType.SEMICOLON, ';'));
           this.advance();
           break;
+        case ',':
+          this.tokens.push(this.createToken(TokenType.COMMA, ','));
+          this.advance();
+          break;
+        case '[':
+          this.tokens.push(this.createToken(TokenType.LBRACKET, '['));
+          this.advance();
+          break;
+        case ']':
+          this.tokens.push(this.createToken(TokenType.RBRACKET, ']'));
+          this.advance();
+          break;
         default: {
           const error: ZCWError = new Error(`意外的字符: ${current} 在行 ${line}, 列 ${column}`);
           error.line = line;

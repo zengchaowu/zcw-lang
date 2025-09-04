@@ -123,7 +123,16 @@ export class Parser {
 
     // 解析标识符调用语句
     if (this.check(TokenType.IDENTIFIER)) {
-      return this.parseIdentifierCall();
+      const identifierToken = this.current()!;
+      this.advance();
+      
+      // 检查是否是直接方法调用（如 click("新建")）
+      if (this.check(TokenType.LPAREN)) {
+        return this.parseDirectMethodCall(identifierToken.value as string);
+      }
+      
+      // 否则是对象方法调用
+      return this.parseIdentifierCall(identifierToken.value as string);
     }
 
     const current = this.current();
@@ -171,9 +180,14 @@ export class Parser {
   /**
    * 解析标识符调用
    */
-  private parseIdentifierCall(): ASTNode {
-    const identifierToken = this.expect(TokenType.IDENTIFIER);
-    const identifierNode = this.createNode(ASTNodeType.IDENTIFIER, identifierToken.value as string);
+  private parseIdentifierCall(identifierName?: string): ASTNode {
+    let identifierNode: ASTNode;
+    if (identifierName) {
+      identifierNode = this.createNode(ASTNodeType.IDENTIFIER, identifierName);
+    } else {
+      const identifierToken = this.expect(TokenType.IDENTIFIER);
+      identifierNode = this.createNode(ASTNodeType.IDENTIFIER, identifierToken.value as string);
+    }
     
     // 检查是否有方法调用
     if (this.check(TokenType.DOT)) {
@@ -222,7 +236,12 @@ export class Parser {
     // 解析第一个参数
     args.push(this.parseExpression());
     
-    // 解析更多参数（目前只支持单个参数）
+    // 解析更多参数
+    while (this.check(TokenType.COMMA)) {
+      this.advance(); // 消费逗号
+      args.push(this.parseExpression());
+    }
+    
     return args;
   }
 
@@ -247,6 +266,10 @@ export class Parser {
       return this.createNode(ASTNodeType.NUMBER, token.value as number);
     }
     
+    if (token.type === TokenType.LBRACKET) {
+      return this.parseArray();
+    }
+    
     if (token.type === TokenType.IDENTIFIER) {
       this.advance();
       return this.createNode(ASTNodeType.IDENTIFIER, token.value as string);
@@ -256,5 +279,54 @@ export class Parser {
     error.line = token.line;
     error.column = token.column;
     throw error;
+  }
+
+  /**
+   * 解析直接方法调用
+   */
+  private parseDirectMethodCall(methodName: string): ASTNode {
+    const methodNode = this.createNode(ASTNodeType.METHOD, methodName);
+    
+    // 解析参数列表
+    this.expect(TokenType.LPAREN);
+    const args = this.parseArguments();
+    this.expect(TokenType.RPAREN);
+    
+    // 解析分号
+    this.expect(TokenType.SEMICOLON);
+    
+    const callNode = this.createNode(ASTNodeType.CALL);
+    callNode.children.push(methodNode);
+    
+    for (const arg of args) {
+      callNode.children.push(arg);
+    }
+    
+    return callNode;
+  }
+
+  /**
+   * 解析数组
+   */
+  private parseArray(): ASTNode {
+    this.expect(TokenType.LBRACKET);
+    const arrayNode = this.createNode(ASTNodeType.ARRAY);
+    
+    if (this.check(TokenType.RBRACKET)) {
+      this.advance(); // 消费右括号
+      return arrayNode; // 空数组
+    }
+    
+    // 解析第一个元素
+    arrayNode.children.push(this.parseExpression());
+    
+    // 解析更多元素
+    while (this.check(TokenType.COMMA)) {
+      this.advance(); // 消费逗号
+      arrayNode.children.push(this.parseExpression());
+    }
+    
+    this.expect(TokenType.RBRACKET);
+    return arrayNode;
   }
 }

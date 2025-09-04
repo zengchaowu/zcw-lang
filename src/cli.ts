@@ -7,13 +7,13 @@
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { Lexer, Parser, Interpreter } from './runtime/index.js';
-import { core } from './core/index.js';
+import { browser } from './core/index.js';
 
 class ZCWCLI {
   private interpreter: Interpreter;
 
   constructor() {
-    this.interpreter = new Interpreter(core);
+    this.interpreter = new Interpreter(browser);
   }
 
   /**

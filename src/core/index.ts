@@ -2,12 +2,13 @@
  * 核心库模块入口
  */
 
-export { Core } from './core.js';
-export type { CoreMethod, CoreMethods, CoreConfig } from './types.js';
+export { BrowserManager } from './browser.js';
+export type { BrowserConfig } from './browser.js';
 
 // 创建默认实例
-import { Core } from './core.js';
+import { BrowserManager } from './browser.js';
 
-export const core = new Core({
-  debug: process.env['DEBUG'] === '1' || process.env['DEBUG'] === 'true'
+export const browser = new BrowserManager({
+  debug: process.env['DEBUG'] === '1' || process.env['DEBUG'] === 'true',
+  timeout: 5000
 });

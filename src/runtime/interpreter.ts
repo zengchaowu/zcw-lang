@@ -3,14 +3,14 @@
  */
 
 import { ASTNode, ASTNodeType, ZCWValue, ZCWError } from './types.js';
-import { Core } from '../core/index.js';
+import { BrowserManager } from '../core/index.js';
 
 export class Interpreter {
   private variables: Map<string, any> = new Map();
-  private core: Core;
+  private browser: BrowserManager;
 
-  constructor(core: Core) {
-    this.core = core;
+  constructor(browser: BrowserManager) {
+    this.browser = browser;
   }
 
   /**
@@ -52,6 +52,14 @@ export class Interpreter {
       case ASTNodeType.IDENTIFIER:
         return this.variables.get(node.value as string) || node.value;
         
+      case ASTNodeType.ARRAY:
+        const array: ZCWValue[] = [];
+        for (const child of node.children) {
+          const value = await this.interpretNode(child);
+          array.push(value);
+        }
+        return array;
+        
       default: {
         const error: ZCWError = new Error(`未知的节点类型: ${node.type}`);
         throw error;
@@ -91,6 +99,11 @@ export class Interpreter {
       return await this.interpretCoreCall(methodNode.value as string, resolvedArgs);
     }
 
+    // 处理直接方法调用（如 click("新建")）
+    if (objectNode.type === ASTNodeType.METHOD) {
+      return await this.interpretCoreCall(objectNode.value as string, resolvedArgs);
+    }
+
     // 处理其他对象的方法调用
     if (objectNode.type === ASTNodeType.IDENTIFIER) {
       return await this.interpretObjectCall(
@@ -111,13 +124,13 @@ export class Interpreter {
    * @returns 方法执行结果
    */
   private async interpretCoreCall(methodName: string, args: ZCWValue[]): Promise<ZCWValue> {
-    console.log(`调用 core.${methodName}(${args.map(arg => JSON.stringify(arg)).join(', ')})`);
+    console.log(`调用 browser.${methodName}(${args.map(arg => JSON.stringify(arg)).join(', ')})`);
     
     try {
-      const result = await this.core.callMethod(methodName, args);
+      const result = await this.browser.callMethod(methodName, args);
       return result;
     } catch (error) {
-      console.error(`执行 core.${methodName} 时出错: ${error instanceof Error ? error.message : '未知错误'}`);
+      console.error(`执行 browser.${methodName} 时出错: ${error instanceof Error ? error.message : '未知错误'}`);
       throw error;
     }
   }
@@ -134,6 +147,11 @@ export class Interpreter {
     methodName: string, 
     args: ZCWValue[]
   ): Promise<ZCWValue> {
+    // 特殊处理browser对象
+    if (objectName === 'browser') {
+      return await this.interpretCoreCall(methodName, args);
+    }
+
     // 检查变量是否存在
     if (!this.variables.has(objectName)) {
       const error: ZCWError = new Error(`未定义的变量: ${objectName}`);
