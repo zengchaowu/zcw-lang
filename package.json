@@ -1,6 +1,6 @@
 {
   "name": "zcw-lang",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "自定义DSL语言，后缀为zcw - TypeScript版本",
   "main": "dist/index.js",
   "bin": {
