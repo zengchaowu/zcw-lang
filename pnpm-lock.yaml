@@ -14,6 +14,9 @@ importers:
       '@zcw-lang/runtime':
         specifier: workspace:*
         version: link:packages/runtime
+      zcw-shared:
+        specifier: ^1.15.0
+        version: 1.15.0
     devDependencies:
       '@types/node':
         specifier: ^20.0.0
@@ -57,6 +60,9 @@ packages:
   undici-types@6.21.0:
     resolution: {integrity: sha512-iwDZqg0QAGrg9Rav5H4n0M64c3mkR59cJ6wQp+7C4nI0gsmExaedaYLNO44eT4AtBBwjbTiGPMlt2Md0T9H9JQ==}
 
+  zcw-shared@1.15.0:
+    resolution: {integrity: sha512-V5vgXoUZqdM0bJZrne8uMC77ZA+Z6IbA9UBci1wEWpLRP6So8ZNCgo6AC1PtFYd4zrxYlWHojkgr7vkNz/DHvg==}
+
 snapshots:
 
   '@types/node@20.19.12':
@@ -66,3 +72,5 @@ snapshots:
   typescript@5.9.2: {}
 
   undici-types@6.21.0: {}
+
+  zcw-shared@1.15.0: {}

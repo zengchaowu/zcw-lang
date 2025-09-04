@@ -21,9 +21,20 @@
     "clean": "pnpm -r clean && rm -rf dist",
     "install:all": "pnpm install",
     "prepublishOnly": "pnpm build",
-    "postinstall": "node dist/cli.js --version"
+    "postinstall": "node dist/cli.js --version",
+    "publish:patch": "npx tsx scripts/publish.ts patch",
+    "publish:minor": "npx tsx scripts/publish.ts minor",
+    "publish:major": "npx tsx scripts/publish.ts major",
+    "publish:prerelease": "npx tsx scripts/publish.ts prerelease"
   },
-  "keywords": ["dsl", "language", "interpreter", "typescript", "cli", "zcw"],
+  "keywords": [
+    "dsl",
+    "language",
+    "interpreter",
+    "typescript",
+    "cli",
+    "zcw"
+  ],
   "author": "zcw",
   "license": "MIT",
   "engines": {
@@ -35,6 +46,7 @@
   },
   "dependencies": {
     "@zcw-lang/core": "workspace:*",
-    "@zcw-lang/runtime": "workspace:*"
+    "@zcw-lang/runtime": "workspace:*",
+    "zcw-shared": "^1.15.0"
   }
 }
