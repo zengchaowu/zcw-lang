@@ -2,9 +2,9 @@
  * 核心库 - 提供内置功能
  */
 
-import { spawn } from 'node:child_process';
-import { platform } from 'node:os';
 import { CoreMethod, CoreMethods, CoreConfig } from './types.js';
+
+// 动态导入Puppeteer，避免打包时包含
 
 export class Core {
   private methods: CoreMethods;
@@ -23,7 +23,7 @@ export class Core {
   }
 
   /**
-   * 打开指定的网页URL
+   * 打开指定的网页URL（使用Puppeteer）
    * @param url - 要打开的网页URL
    * @returns Promise<boolean> 成功返回true，失败返回false
    */
@@ -33,20 +33,21 @@ export class Core {
         console.log(`[Core] 正在打开网页: ${url}`);
       }
       
-      // 在Node.js环境中，我们使用子进程来打开浏览器
-      const command = this.getOpenCommand();
-      const args = [url];
-      
-      const child = spawn(command, args, { 
-        stdio: 'inherit',
-        detached: true 
+      const puppeteer = await this.loadPuppeteer();
+      const browser = await puppeteer.launch({ 
+        headless: false,
+        args: ['--no-sandbox', '--disable-setuid-sandbox']
       });
       
-      child.unref(); // 让父进程不等待子进程
+      const page = await browser.newPage();
+      await page.goto(url, { timeout: this.config.timeout });
       
       if (this.config.debug) {
-        console.log(`[Core] 网页已在默认浏览器中打开: ${url}`);
+        const title = await page.title();
+        console.log(`[Core] 网页已通过Puppeteer打开: ${url} (标题: ${title})`);
       }
+      
+      // 保持浏览器打开，让用户可以看到页面
       return true;
       
     } catch (error) {
@@ -56,19 +57,42 @@ export class Core {
   }
 
   /**
-   * 获取打开命令
-   * @returns 平台对应的打开命令
+   * 动态加载Puppeteer
+   * @returns Promise<any> Puppeteer实例
    */
-  private getOpenCommand(): string {
-    switch (platform()) {
-      case 'darwin': // macOS
-        return 'open';
-      case 'win32': // Windows
-        return 'start';
-      default: // Linux和其他
-        return 'xdg-open';
+  private async loadPuppeteer(): Promise<any> {
+    try {
+      // 使用动态导入避免TypeScript编译时检查
+      const puppeteer = await import('puppeteer' as any);
+      return puppeteer.default || puppeteer;
+    } catch (error) {
+      // 尝试从全局安装的puppeteer加载
+      try {
+        const { execSync } = await import('child_process');
+        const globalPuppeteerPath = execSync('npm root -g', { encoding: 'utf8' }).trim();
+        const puppeteerPath = `${globalPuppeteerPath}/puppeteer`;
+        
+        // 检查路径是否存在
+        const { existsSync } = await import('fs');
+        if (!existsSync(puppeteerPath)) {
+          throw new Error('Puppeteer not found in global path');
+        }
+        
+        // 尝试不同的导入方式
+        try {
+          const puppeteer = await import(puppeteerPath);
+          return puppeteer.default || puppeteer;
+        } catch (importError) {
+          // 尝试使用require方式
+          const puppeteer = require(puppeteerPath);
+          return puppeteer.default || puppeteer;
+        }
+      } catch (globalError) {
+        throw new Error(`Puppeteer未安装。请运行: npm install -g puppeteer\n原始错误: ${error instanceof Error ? error.message : '未知错误'}`);
+      }
     }
   }
+
 
   /**
    * 调用指定的方法

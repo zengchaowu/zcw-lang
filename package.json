@@ -22,7 +22,7 @@
     "publish:minor": "npx tsx scripts/publish.ts minor",
     "publish:major": "npx tsx scripts/publish.ts major",
     "publish:prerelease": "npx tsx scripts/publish.ts prerelease",
-    "bundle": "esbuild src/cli.ts --bundle --platform=node --target=node16 --outfile=dist/zcw --format=cjs --external:node:*",
+    "bundle": "esbuild src/cli.ts --bundle --platform=node --target=node16 --outfile=dist/zcw --format=cjs --external:node:* --external:puppeteer",
     "bundle:win": "esbuild src/cli.ts --bundle --platform=node --target=node16 --outfile=dist/zcw.exe --format=esm --external:node:*"
   },
   "keywords": [
@@ -43,5 +43,8 @@
     "esbuild": "^0.25.9",
     "typescript": "^5.0.0",
     "zcw-shared": "^1.15.0"
+  },
+  "optionalDependencies": {
+    "puppeteer": "^21.0.0"
   }
 }
