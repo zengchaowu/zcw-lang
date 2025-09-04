@@ -5,8 +5,8 @@
  */
 
 import { readFileSync } from 'node:fs';
-import { Lexer, Parser, Interpreter } from '@zcw-lang/runtime';
-import { core } from '@zcw-lang/core';
+import { Lexer, Parser, Interpreter } from './runtime/index.js';
+import { core } from './core/index.js';
 
 export class ZCWLanguage {
   private lexer: Lexer | null = null;

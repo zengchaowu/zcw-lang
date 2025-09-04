@@ -3,7 +3,7 @@
  */
 
 import { ASTNode, ASTNodeType, ZCWValue, ZCWError } from './types.js';
-import { Core } from '@zcw-lang/core';
+import { Core } from '../core/index.js';
 
 export class Interpreter {
   private variables: Map<string, any> = new Map();
