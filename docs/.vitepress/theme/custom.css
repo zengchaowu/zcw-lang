@@ -1,0 +1,93 @@
+:root {
+  --vp-c-brand: #646cff;
+  --vp-c-brand-light: #747bff;
+  --vp-c-brand-lighter: #9499ff;
+  --vp-c-brand-dark: #535bf2;
+  --vp-c-brand-darker: #454ce1;
+}
+
+/* Playground 样式 */
+.playground-container {
+  margin: 2rem 0;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.playground-header {
+  padding: 1rem;
+  background: var(--vp-c-bg-soft);
+  border-bottom: 1px solid var(--vp-c-divider);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.playground-title {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--vp-c-text-1);
+}
+
+.playground-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.playground-button {
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--vp-c-divider);
+  background: var(--vp-c-bg);
+  color: var(--vp-c-text-1);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+}
+
+.playground-button:hover {
+  background: var(--vp-c-bg-soft);
+  border-color: var(--vp-c-brand);
+}
+
+.playground-button.primary {
+  background: var(--vp-c-brand);
+  color: white;
+  border-color: var(--vp-c-brand);
+}
+
+.playground-button.primary:hover {
+  background: var(--vp-c-brand-dark);
+}
+
+.playground-editor {
+  position: relative;
+  min-height: 300px;
+  border-bottom: 1px solid var(--vp-c-divider);
+}
+
+.playground-output {
+  padding: 1rem;
+  background: var(--vp-c-bg);
+  min-height: 100px;
+  max-height: 400px;
+  overflow-y: auto;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.playground-output.success {
+  color: var(--vp-c-success);
+}
+
+.playground-output.error {
+  color: var(--vp-c-danger);
+}
+
+.playground-output pre {
+  margin: 0;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+

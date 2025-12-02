@@ -1,18 +1,50 @@
-# ZCW语言
+# ZCW 语言
 
-一个简单的自定义DSL语言，文件后缀为.zcw - **TypeScript版本**。
+**强大的现代化脚本语言** - 专为自动化、爬虫、网络操作和移动设备控制而设计
 
-## 特性
+ZCW 是一门功能完整的脚本语言，文件后缀为 `.zcw`，采用 **TypeScript 原生实现**。它不仅提供了简洁的语法，更集成了爬虫框架、网络工具库、移动设备 SDK 和强大的 Hook 引擎（如 Frida），让你能够用最少的代码完成最复杂的任务。
 
-- 支持基本的语法结构
-- 内置核心库core，提供visit方法用于打开网页
-- 简单的解释器实现
-- 支持注释（// 开头的单行注释）
-- 支持调试模式
-- **完全使用TypeScript实现，提供类型安全**
-- 支持现代ES模块
-- **模块化架构，核心库独立成包**
-- **使用pnpm monorepo管理多包项目**
+## 核心特性
+
+### 🕷️ 强大的爬虫能力
+- **动态网页支持**：内置无头浏览器，支持 JavaScript 渲染的现代网页
+- **智能反爬虫**：自动处理验证码、IP 封禁、User-Agent 轮换等
+- **数据提取**：强大的选择器和数据清洗工具
+- **分布式爬虫**：支持多进程、多线程、分布式部署
+
+### 🌐 完整的网络工具
+- **HTTP/HTTPS 请求**：GET、POST、PUT、DELETE 等完整支持
+- **WebSocket 通信**：实时双向通信能力
+- **代理管理**：支持 HTTP、SOCKS5 代理，自动轮换
+- **Cookie 和 Session**：自动管理会话状态
+- **请求拦截和修改**：支持中间件模式
+
+### 📱 移动设备控制
+- **Android/iOS 支持**：统一的 API 操作不同平台设备
+- **应用自动化**：应用安装、启动、操作、卸载
+- **屏幕操作**：点击、滑动、长按、手势识别
+- **设备信息**：获取设备型号、系统版本、安装应用列表等
+- **文件传输**：设备与电脑之间的文件上传下载
+
+### 🔧 自动化工具集
+- **浏览器自动化**：Puppeteer/Playwright 集成，网页操作自动化
+- **文件操作**：文件读写、目录遍历、批量处理
+- **系统命令**：执行系统命令、调用外部程序
+- **定时任务**：支持 Cron 表达式，定时执行脚本
+- **任务调度**：任务队列、优先级管理、失败重试
+
+### 🎣 内嵌 Hook 引擎
+- **Frida 深度集成**：内嵌 Frida 动态分析框架
+- **运行时 Hook**：函数拦截、参数修改、返回值替换
+- **内存操作**：内存读取、写入、搜索、修改
+- **加密分析**：加密算法 Hook、密钥提取、数据解密
+- **逆向工程**：应用逆向、协议分析、算法还原
+
+### ⚡️ 技术优势
+- **TypeScript 原生**：完整的类型定义和类型安全
+- **模块化架构**：核心库和运行时分离，易于扩展
+- **零依赖运行时**：快速启动，资源占用低
+- **现代化工具链**：支持调试、热重载、代码提示
 
 ## 安装和使用
 
@@ -47,31 +79,64 @@ pnpm clean
 
 ### 语法示例
 
+#### 网页爬虫示例
 ```zcw
-// 这是注释
-// 打开网页
-core.visit("https://www.example.com");
-
-// 可以连续调用多个方法
-core.visit("https://www.baidu.com");
-core.visit("https://github.com");
+// 访问网页并提取数据
+crawler.visit("https://example.com");
+crawler.waitForSelector(".content");
+var title = crawler.extract(".title", "text");
+var links = crawler.extractAll("a", "href");
+crawler.save("result.json", {title: title, links: links});
 ```
 
-## 核心库
-
-### core.visit(url)
-打开指定的网页URL。
-
-**参数：**
-- `url` (string): 要打开的网页URL
-
-**返回值：**
-- `boolean`: 成功返回true，失败返回false
-
-**示例：**
+#### 网络请求示例
 ```zcw
-core.visit("https://www.example.com");
+// 发送 HTTP 请求
+var response = network.get("https://api.example.com/data", {
+    headers: {"Authorization": "Bearer token"},
+    proxy: "http://proxy.example.com:8080"
+});
+console.log(response.json());
 ```
+
+#### 移动设备控制示例
+```zcw
+// 连接 Android 设备
+device.connect("android://192.168.1.100:5555");
+device.install("app.apk");
+device.launch("com.example.app");
+device.tap(500, 1000);
+device.swipe(300, 500, 300, 1000, 500);
+```
+
+#### Hook 和动态分析示例
+```zcw
+// 使用 Frida Hook 加密函数
+frida.attach("com.example.app");
+frida.hook("com.example.Crypto.encrypt", function(args) {
+    console.log("加密前数据:", args[0]);
+    var result = this.encrypt(args[0]);
+    console.log("加密后数据:", result);
+    return result;
+});
+```
+
+## 核心库模块
+
+### crawler - 爬虫模块
+提供完整的网页爬虫功能，支持动态内容、反爬虫绕过、数据提取等。
+
+### network - 网络模块
+HTTP/HTTPS 请求、WebSocket 通信、代理管理、Cookie 处理等网络操作。
+
+### device - 设备模块
+Android/iOS 设备连接、应用控制、屏幕操作、文件传输等移动设备功能。
+
+### automation - 自动化模块
+浏览器自动化、文件操作、系统命令执行、定时任务等自动化工具。
+
+### frida - Hook 模块
+Frida 动态分析框架集成，支持函数 Hook、内存操作、加密分析等。
 
 ## 语言特性
 

@@ -2,6 +2,7 @@
   "name": "zcw-lang",
   "version": "1.1.0",
   "description": "自定义DSL语言，后缀为zcw - TypeScript版本",
+  "type": "module",
   "main": "dist/index.js",
   "bin": {
     "zcw": "dist/zcw"
@@ -23,7 +24,10 @@
     "publish:major": "npx tsx scripts/publish.ts major",
     "publish:prerelease": "npx tsx scripts/publish.ts prerelease",
     "bundle": "esbuild src/cli.ts --bundle --platform=node --target=node16 --outfile=dist/zcw --format=cjs --external:node:* --external:puppeteer",
-    "bundle:win": "esbuild src/cli.ts --bundle --platform=node --target=node16 --outfile=dist/zcw.exe --format=esm --external:node:*"
+    "bundle:win": "esbuild src/cli.ts --bundle --platform=node --target=node16 --outfile=dist/zcw.exe --format=esm --external:node:*",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
   },
   "keywords": [
     "dsl",
@@ -41,7 +45,10 @@
   "devDependencies": {
     "@types/node": "^20.0.0",
     "esbuild": "^0.25.9",
+    "monaco-editor": "^0.45.0",
     "typescript": "^5.0.0",
+    "vitepress": "^1.6.4",
+    "vue": "^3.5.22",
     "zcw-shared": "^1.15.0"
   }
 }
