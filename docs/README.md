@@ -42,11 +42,17 @@ docs/
 
 ## 部署
 
-文档可以部署到：
-- Vercel
-- Netlify
-- GitHub Pages
-- 任何静态文件托管服务
+生产站点：**https://zcw-lang.zengchaowu.com**
 
-构建后的文件在 `docs/.vitepress/dist` 目录。
+```bash
+# 首次：初始化 COS + CDN + DNS + HTTPS（在 workspace 根目录）
+pnpm provision:site -- zcw-lang.zengchaowu.com
+
+# 构建并上传到 COS（在 packages/zcw-lang）
+pnpm deploy:cos
+```
+
+部署前须在 `packages/api.zengchaowu.com/.env.prod` 或环境变量中配置 `TENCENT_SECRET_ID`、`TENCENT_SECRET_KEY`。
+
+构建产物目录：`docs/.vitepress/dist`。
 

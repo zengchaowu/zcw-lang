@@ -39,5 +39,5 @@ core.visit("https://github.com");
 2. 在 `methods` 对象中注册新方法
 3. 重新构建和测试功能
 
-查看[开发文档](/guide/development)了解更多信息。
+查看[快速开始](/guide/getting-started)了解更多信息。
 

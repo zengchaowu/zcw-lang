@@ -70,7 +70,7 @@ ZCW语言解释器 v1.0.0
   zcw example.zcw        执行example.zcw文件
   zcw test.zcw          执行test.zcw文件
 
-更多信息请访问: https://github.com/your-repo/zcw-lang
+更多信息请访问: https://zcw-lang.zengchaowu.com
     `);
   }
 

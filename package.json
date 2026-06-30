@@ -27,7 +27,9 @@
     "bundle:win": "esbuild src/cli.ts --bundle --platform=node --target=node16 --outfile=dist/zcw.exe --format=esm --external:node:*",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
-    "docs:preview": "vitepress preview docs"
+    "docs:preview": "vitepress preview docs",
+    "deploy:cos:build": "vitepress build docs",
+    "deploy:cos": "npx tsx scripts/deploy-cos.ts"
   },
   "keywords": [
     "dsl",
@@ -44,11 +46,14 @@
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
+    "cos-nodejs-sdk-v5": "^2.15.4",
+    "dotenv": "^17.2.3",
     "esbuild": "^0.25.9",
     "monaco-editor": "^0.45.0",
+    "tsx": "^4.21.0",
     "typescript": "^5.0.0",
     "vitepress": "^1.6.4",
     "vue": "^3.5.22",
-    "zcw-shared": "^1.15.0"
+    "zcw-shared": "workspace:*"
   }
 }
