@@ -11,7 +11,7 @@ export default defineConfig({
 
   head: [
     ['link', { rel: 'icon', href: '/favicon.svg', type: 'image/svg+xml' }],
-    ['meta', { name: 'theme-color', content: '#646cff' }],
+    ['meta', { name: 'theme-color', content: '#0052d9' }],
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:site_name', content: 'ZCW 语言' }],
     ['meta', { property: 'og:url', content: SITE_URL }],

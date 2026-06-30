@@ -54,6 +54,7 @@
     "typescript": "^5.0.0",
     "vitepress": "^1.6.4",
     "vue": "^3.5.22",
-    "zcw-shared": "workspace:*"
+    "zcw-shared": "workspace:*",
+    "zcw-vue-ui": "workspace:*"
   }
 }

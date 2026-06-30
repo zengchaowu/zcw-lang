@@ -3,16 +3,30 @@
     <div class="playground-header">
       <div class="playground-title">ZCW 代码编辑器</div>
       <div class="playground-actions">
-        <button class="playground-button" @click="resetCode">重置</button>
-        <button class="playground-button primary" @click="runCode" :disabled="isRunning">
+        <CwButton
+          type="default"
+          variant="outline"
+          :styles="playgroundSecondaryButtonStyles"
+          @click="resetCode"
+        >
+          重置
+        </CwButton>
+        <CwButton
+          type="primary"
+          variant="solid"
+          :disabled="isRunning"
+          :loading="isRunning"
+          :styles="playgroundPrimaryButtonStyles"
+          @click="runCode"
+        >
           {{ isRunning ? '运行中...' : '运行' }}
-        </button>
+        </CwButton>
       </div>
     </div>
     <div class="playground-editor" ref="editorContainer"></div>
     <div class="playground-output" :class="{ success: !hasError, error: hasError }">
-      <div v-if="output.length === 0" style="color: var(--vp-c-text-2);">
-        点击"运行"按钮执行代码...
+      <div v-if="output.length === 0" class="text-[var(--text-color-secondary)]">
+        点击「运行」按钮执行代码…
       </div>
       <div v-else>
         <pre v-for="(line, index) in output" :key="index">{{ line }}</pre>
@@ -23,6 +37,8 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { CwButton } from 'zcw-vue-ui/CwButton'
+import { playgroundPrimaryButtonStyles, playgroundSecondaryButtonStyles } from './homeUiStyles'
 
 const editorContainer = ref<HTMLElement>()
 let editor: any = null
