@@ -37,7 +37,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount } from 'vue'
-import { CwButton } from 'zcw-vue-ui/CwButton'
+import { CwButton } from '@zengchaowu/vue-ui/CwButton'
 import { playgroundPrimaryButtonStyles, playgroundSecondaryButtonStyles } from './homeUiStyles'
 
 const editorContainer = ref<HTMLElement>()

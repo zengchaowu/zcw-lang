@@ -1,6 +1,6 @@
-import type { CwButtonStyles } from 'zcw-vue-ui/CwButton'
-import type { CwCardStyles } from 'zcw-vue-ui/CwCard'
-import type { CwFeatureCardGridStyles } from 'zcw-vue-ui/CwFeatureCardGrid'
+import type { CwButtonStyles } from '@zengchaowu/vue-ui/CwButton'
+import type { CwCardStyles } from '@zengchaowu/vue-ui/CwCard'
+import type { CwFeatureCardGridStyles } from '@zengchaowu/vue-ui/CwFeatureCardGrid'
 
 export const heroPrimaryButtonStyles: Partial<CwButtonStyles> = {
   root: '!h-10 !min-h-10 px-5 rounded-lg text-sm font-medium',

@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { withBase } from 'vitepress'
-import { CwButton } from 'zcw-vue-ui/CwButton'
-import { CwCard } from 'zcw-vue-ui/CwCard'
-import { CwFeatureCardGrid } from 'zcw-vue-ui/CwFeatureCardGrid'
-import { CwIcon } from 'zcw-vue-ui/CwIcon'
-import type { CwFeatureCardItem } from 'zcw-vue-ui/CwFeatureCardGrid'
+import { CwButton } from '@zengchaowu/vue-ui/CwButton'
+import { CwCard } from '@zengchaowu/vue-ui/CwCard'
+import { CwFeatureCardGrid } from '@zengchaowu/vue-ui/CwFeatureCardGrid'
+import { CwIcon } from '@zengchaowu/vue-ui/CwIcon'
+import type { CwFeatureCardItem } from '@zengchaowu/vue-ui/CwFeatureCardGrid'
 import {
   heroPrimaryButtonStyles,
   heroSecondaryButtonStyles,
