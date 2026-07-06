@@ -10,8 +10,8 @@ import { execSync } from 'child_process'
 import { readFileSync, writeFileSync } from 'fs'
 // @ts-ignore
 import { join } from 'path'
-import { incrementVersion } from 'zcw-shared/functions/version/incrementVersion'
-import type { VersionType } from 'zcw-shared/types/semver'
+import { incrementVersion } from '@zengchaowu/shared/functions/version/incrementVersion'
+import type { VersionType } from '@zengchaowu/shared/types/semver'
 
 // @ts-ignore - 忽略 process 全局变量的类型检查
 declare const process: any

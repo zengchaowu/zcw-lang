@@ -7,8 +7,8 @@ import COS from 'cos-nodejs-sdk-v5'
 import path from 'node:path'
 import fs from 'node:fs'
 import process from 'node:process'
-import { uploadToCOS } from 'zcw-shared/functions/tencent-cloud/upload.cos'
-import type { SecretType } from 'zcw-shared/types/tencent-cloud'
+import { uploadToCOS } from '@zengchaowu/shared/functions/tencent-cloud/upload.cos'
+import type { SecretType } from '@zengchaowu/shared/types/tencent-cloud'
 import { runDeployCosPrebuild } from './run-deploy-cos-prebuild'
 
 loadDeployEnv()
