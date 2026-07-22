@@ -52,7 +52,7 @@ const featureItems: CwFeatureCardItem[] = [
     key: 'runtime',
     label: '高性能',
     description: 'TypeScript 原生实现，零依赖运行时',
-    icon: 'jiazai',
+    icon: 'shuaxin',
     iconBgColor: 'color-mix(in srgb, var(--brand-color-6) 12%, transparent)',
   },
 ]
