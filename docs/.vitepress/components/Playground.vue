@@ -6,7 +6,7 @@
         <CwButton
           type="default"
           variant="outline"
-          :styles="playgroundSecondaryButtonStyles"
+          :class="playgroundSecondaryButtonClass"
           @click="resetCode"
         >
           重置
@@ -16,7 +16,7 @@
           variant="solid"
           :disabled="isRunning"
           :loading="isRunning"
-          :styles="playgroundPrimaryButtonStyles"
+          :class="playgroundPrimaryButtonClass"
           @click="runCode"
         >
           {{ isRunning ? '运行中...' : '运行' }}
@@ -38,7 +38,7 @@
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { CwButton } from '@zengchaowu/vue-ui/CwButton'
-import { playgroundPrimaryButtonStyles, playgroundSecondaryButtonStyles } from './homeUiStyles'
+import { playgroundPrimaryButtonClass, playgroundSecondaryButtonClass } from './homeUiStyles'
 
 const editorContainer = ref<HTMLElement>()
 let editor: any = null

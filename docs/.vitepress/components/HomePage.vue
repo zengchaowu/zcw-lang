@@ -6,10 +6,8 @@ import { CwFeatureCardGrid } from '@zengchaowu/vue-ui/CwFeatureCardGrid'
 import { CwIcon } from '@zengchaowu/vue-ui/CwIcon'
 import type { CwFeatureCardItem } from '@zengchaowu/vue-ui/CwFeatureCardGrid'
 import {
-  heroPrimaryButtonStyles,
-  heroSecondaryButtonStyles,
-  homeFeatureGridStyles,
-  homeSectionCardStyles,
+  heroPrimaryButtonClass,
+  heroSecondaryButtonClass,
 } from './homeUiStyles'
 
 const featureItems: CwFeatureCardItem[] = [
@@ -99,7 +97,7 @@ function navigate(path: string) {
         <div
           class="inline-flex w-fit items-center gap-2 rounded-full border border-[var(--component-border)] bg-[var(--bg-color-container)] px-3 py-1.5 text-sm text-[var(--text-color-secondary)]"
         >
-          <CwIcon name="draw--shape--wenben" prefix="icon" :styles="{ root: 'text-[var(--brand-color-6)]', size: 1 }" />
+          <CwIcon name="draw--shape--wenben" prefix="icon" :size="1" class="text-[var(--brand-color-6)]" />
           <span>现代化脚本语言 · 后缀 <code class="text-[var(--brand-color-6)]">.zcw</code></span>
         </div>
 
@@ -116,7 +114,7 @@ function navigate(path: string) {
           <CwButton
             type="primary"
             variant="solid"
-            :styles="heroPrimaryButtonStyles"
+            :class="heroPrimaryButtonClass"
             @click="navigate('/guide/getting-started')"
           >
             快速开始
@@ -124,7 +122,7 @@ function navigate(path: string) {
           <CwButton
             type="default"
             variant="outline"
-            :styles="heroSecondaryButtonStyles"
+            :class="heroSecondaryButtonClass"
             @click="navigate('/playground')"
           >
             在线体验
@@ -132,7 +130,7 @@ function navigate(path: string) {
           <CwButton
             type="default"
             variant="link"
-            :styles="heroSecondaryButtonStyles"
+            :class="heroSecondaryButtonClass"
             @click="navigate('/api/core')"
           >
             查看 API
@@ -148,7 +146,7 @@ function navigate(path: string) {
         :items="featureItems"
         :columns="3"
         layout="fixed"
-        :styles="homeFeatureGridStyles"
+        appearance="home"
       />
     </section>
 
@@ -165,7 +163,8 @@ function navigate(path: string) {
         <CwCard
           v-for="item in examples"
           :key="item.title"
-          :styles="homeSectionCardStyles"
+          appearance="homeSection"
+          :show-header-divider="false"
         >
           <template #headerLeft>
             <span class="text-sm font-semibold text-[var(--text-color-primary)]">{{ item.title }}</span>
@@ -177,7 +176,7 @@ function navigate(path: string) {
 
     <!-- Install -->
     <section class="mt-10">
-      <CwCard :styles="homeSectionCardStyles">
+      <CwCard appearance="homeSection" :show-header-divider="false">
         <template #headerLeft>
           <span class="text-sm font-semibold text-[var(--text-color-primary)]">安装与运行</span>
         </template>
@@ -190,7 +189,7 @@ zcw example.zcw</code></pre>
             <CwButton
               type="primary"
               variant="solid"
-              :styles="heroPrimaryButtonStyles"
+              :class="heroPrimaryButtonClass"
               @click="navigate('/guide/getting-started')"
             >
               阅读完整文档
@@ -198,7 +197,7 @@ zcw example.zcw</code></pre>
             <CwButton
               type="default"
               variant="outline"
-              :styles="heroSecondaryButtonStyles"
+              :class="heroSecondaryButtonClass"
               @click="navigate('/examples')"
             >
               更多示例
