@@ -22,7 +22,7 @@ const featureItems: CwFeatureCardItem[] = [
     key: 'network',
     label: '网络操作',
     description: 'HTTP、WebSocket、代理与 Cookie 管理',
-    icon: 'common--action--lianjie',
+    icon: 'common--action--link',
     iconBgColor: 'color-mix(in srgb, var(--success-color-6) 12%, transparent)',
   },
   {
