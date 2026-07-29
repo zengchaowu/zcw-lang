@@ -9,7 +9,7 @@ import fs from 'node:fs'
 import process from 'node:process'
 import { uploadToCOS } from '@zengchaowu/shared/functions/tencent-cloud/upload.cos'
 import type { SecretType } from '@zengchaowu/shared/types/tencent-cloud'
-import { runDeployCosPrebuild } from './run-deploy-cos-prebuild'
+import { runDeployCosPrebuild, markCosDeploySucceeded } from './run-deploy-cos-prebuild'
 
 loadDeployEnv()
 
@@ -90,6 +90,7 @@ async function deployInNodeJS() {
     if (result.success) {
       console.log('部署成功:', result.message)
       console.log(`共上传 ${result.filesCount} 个文件`)
+      markCosDeploySucceeded()
       console.log('站点: https://zcw-lang.zengchaowu.com/')
     } else {
       console.error('部署失败:', result.error)

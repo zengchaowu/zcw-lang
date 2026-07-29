@@ -1,13 +1,30 @@
 /**
- * deploy:cos 执行前自动跑 package.json 中的 scripts.deploy:cos:build。
- * 设置 DEPLOY_COS_SKIP_BUILD=1 可跳过。
+ * deploy:cos 执行前：
+ * 1) 相对上次 cos-deployed-{mode} tag 无变更则 exit 0
+ * 2) 否则自动跑 package.json 中的 scripts.deploy:cos:build（DEPLOY_COS_SKIP_BUILD=1 可跳过构建）
  */
 import fs from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
 import { execSync } from 'node:child_process'
+import {
+  exitIfUnchangedDeploy,
+  markDeployed,
+} from '../../../scripts/lib/git-deploy-skip.mjs'
+
+export function markCosDeploySucceeded(): void {
+  markDeployed(process.cwd(), {
+    kind: 'cos',
+    mode: process.env.DEPLOY_MODE || 'prod',
+  })
+}
 
 export function runDeployCosPrebuild(): void {
+  exitIfUnchangedDeploy(process.cwd(), {
+    kind: 'cos',
+    mode: process.env.DEPLOY_MODE || 'prod',
+  })
+
   if (process.env.DEPLOY_COS_SKIP_BUILD === '1' || process.env.DEPLOY_COS_SKIP_BUILD === 'true') {
     console.log('[deploy:cos] 跳过构建（DEPLOY_COS_SKIP_BUILD）')
     return
