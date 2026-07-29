@@ -1,6 +1,6 @@
 {
   "name": "zcw-lang",
-  "version": "1.1.1",
+  "version": "1.2.1",
   "description": "自定义DSL语言，后缀为zcw - TypeScript版本",
   "type": "module",
   "main": "dist/index.js",
@@ -43,6 +43,10 @@
   "license": "MIT",
   "engines": {
     "node": ">=16.0.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://npm-195115-7-1307503455.sh.run.tcloudbase.com/"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
