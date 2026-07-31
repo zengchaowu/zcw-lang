@@ -15,14 +15,14 @@ const featureItems: CwFeatureCardItem[] = [
     key: 'crawler',
     label: '爬虫能力',
     description: '动态网页抓取、数据提取与反爬绕过',
-    icon: 'common--action--xiazai',
+    icon: 'common--action--download-line',
     iconBgColor: 'color-mix(in srgb, var(--brand-color-6) 12%, transparent)',
   },
   {
     key: 'network',
     label: '网络操作',
     description: 'HTTP、WebSocket、代理与 Cookie 管理',
-    icon: 'common--action--link',
+    icon: 'common--action--link-line',
     iconBgColor: 'color-mix(in srgb, var(--success-color-6) 12%, transparent)',
   },
   {
@@ -36,14 +36,14 @@ const featureItems: CwFeatureCardItem[] = [
     key: 'automation',
     label: '自动化工具',
     description: '浏览器、文件、命令与定时任务',
-    icon: 'common--nav--shezhi',
+    icon: 'common--nav--settings-line',
     iconBgColor: 'color-mix(in srgb, var(--purple-color-6) 12%, transparent)',
   },
   {
     key: 'hook',
     label: 'Hook 引擎',
     description: 'Frida 运行时拦截与内存分析',
-    icon: 'common--nav--code',
+    icon: 'common--nav--code-line',
     iconBgColor: 'color-mix(in srgb, var(--error-color-6) 12%, transparent)',
   },
   {
@@ -97,7 +97,7 @@ function navigate(path: string) {
         <div
           class="inline-flex w-fit items-center gap-2 rounded-full border border-[var(--component-border)] bg-[var(--bg-color-container)] px-3 py-1.5 text-sm text-[var(--text-color-secondary)]"
         >
-          <CwIcon name="draw--shape--wenben" prefix="icon" :size="1" class="text-[var(--brand-color-6)]" />
+          <CwIcon name="draw--shape--text-line" prefix="icon" :size="1" class="text-[var(--brand-color-6)]" />
           <span>现代化脚本语言 · 后缀 <code class="text-[var(--brand-color-6)]">.zcw</code></span>
         </div>
 
