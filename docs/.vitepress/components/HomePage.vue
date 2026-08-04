@@ -163,7 +163,7 @@ function navigate(path: string) {
         <CwCard
           v-for="item in examples"
           :key="item.title"
-          appearance="homeSection"
+          appearance="section"
           :show-header-divider="false"
         >
           <template #headerLeft>
@@ -176,7 +176,7 @@ function navigate(path: string) {
 
     <!-- Install -->
     <section class="mt-10">
-      <CwCard appearance="homeSection" :show-header-divider="false">
+      <CwCard appearance="section" :show-header-divider="false">
         <template #headerLeft>
           <span class="text-sm font-semibold text-[var(--text-color-primary)]">安装与运行</span>
         </template>
