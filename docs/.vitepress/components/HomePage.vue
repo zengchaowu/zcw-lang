@@ -84,7 +84,7 @@ function navigate(path: string) {
   <div class="zcw-lang-home mx-auto w-full max-w-[72rem] px-4 pb-16 pt-2 md:px-6">
     <!-- Hero -->
     <section
-      class="relative overflow-hidden rounded-2xl border border-[var(--component-border)] bg-[linear-gradient(135deg,color-mix(in_srgb,var(--brand-color-6)_14%,var(--bg-color-container))_0%,var(--bg-color-container)_55%,color-mix(in_srgb,var(--purple-color-6)_8%,var(--bg-color-container))_100%)] px-6 py-12 md:px-10 md:py-16"
+      class="relative overflow-hidden rounded-2xl border border-[var(--border-color)] bg-[linear-gradient(135deg,color-mix(in_srgb,var(--brand-color-6)_14%,var(--bg-color-container))_0%,var(--bg-color-container)_55%,color-mix(in_srgb,var(--purple-color-6)_8%,var(--bg-color-container))_100%)] px-6 py-12 md:px-10 md:py-16"
     >
       <div
         class="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-[color-mix(in_srgb,var(--brand-color-6)_18%,transparent)] blur-3xl"
@@ -95,7 +95,7 @@ function navigate(path: string) {
 
       <div class="relative flex flex-col gap-6 md:gap-8">
         <div
-          class="inline-flex w-fit items-center gap-2 rounded-full border border-[var(--component-border)] bg-[var(--bg-color-container)] px-3 py-1.5 text-sm text-[var(--text-color-secondary)]"
+          class="inline-flex w-fit items-center gap-2 rounded-full border border-[var(--border-color)] bg-[var(--bg-color-container)] px-3 py-1.5 text-sm text-[var(--text-color-secondary)]"
         >
           <CwIcon name="draw--shape--text-line" prefix="icon" :size="1" class="text-[var(--brand-color-6)]" />
           <span>现代化脚本语言 · 后缀 <code class="text-[var(--brand-color-6)]">.zcw</code></span>

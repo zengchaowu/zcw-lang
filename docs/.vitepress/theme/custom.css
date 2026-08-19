@@ -8,7 +8,7 @@
   --vp-c-bg-alt: var(--bg-color-container);
   --vp-c-text-1: var(--text-color-primary);
   --vp-c-text-2: var(--text-color-secondary);
-  --vp-c-divider: var(--component-border);
+  --vp-c-divider: var(--border-color);
 }
 
 .dark {
@@ -34,7 +34,7 @@
 /* 文档页圆角与排版 */
 .vp-doc div[class*='language-'] {
   border-radius: 0.75rem;
-  border: 1px solid var(--component-border);
+  border: 1px solid var(--border-color);
 }
 
 .vp-doc h2 {
@@ -45,7 +45,7 @@
 /* Playground */
 .playground-container {
   margin: 1.5rem 0;
-  border: 1px solid var(--component-border);
+  border: 1px solid var(--border-color);
   border-radius: 0.75rem;
   overflow: hidden;
   background: var(--bg-color-container);
@@ -59,7 +59,7 @@
     color-mix(in srgb, var(--brand-color-6) 6%, transparent) 0%,
     transparent 100%
   );
-  border-bottom: 1px solid var(--component-border);
+  border-bottom: 1px solid var(--border-color);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -81,7 +81,7 @@
 .playground-editor {
   position: relative;
   min-height: 300px;
-  border-bottom: 1px solid var(--component-border);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .playground-output {
