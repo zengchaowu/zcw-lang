@@ -11,6 +11,14 @@ import { uploadToCOS } from '@zengchaowu/shared/functions/tencent-cloud/upload.c
 import type { SecretType } from '@zengchaowu/shared/types/tencent-cloud'
 import { runDeployCosPrebuild, markCosDeploySucceeded } from './run-deploy-cos-prebuild'
 
+import { createRequire } from 'node:module'
+const __require = createRequire(import.meta.url)
+const { resolveBucketForPackage, resolveSiteHost, toDevHost, COS_REGION } =
+  __require('../../../scripts/lib/zengchaowu-site.mjs')
+const { resolveDeployModeFromEnv, assertDeployableMode } =
+  __require('../../../scripts/lib/deploy-mode.mjs')
+const __deployMode = assertDeployableMode(resolveDeployModeFromEnv())
+
 loadDeployEnv()
 
 function getSecret(type: SecretType) {
@@ -62,7 +70,7 @@ async function deployInNodeJS() {
     const result = await uploadToCOS(
       {
         localPath: path.join(process.cwd(), 'docs/.vitepress/dist'),
-        bucket: 'zcw-lang-1307503455',
+        bucket: (process.env.COS_SITE_BUCKET?.trim() || resolveBucketForPackage('zcw-lang', process.env, __deployMode)),
         region: 'ap-guangzhou',
         cloudPath: '/',
         secretType: 'individual',
