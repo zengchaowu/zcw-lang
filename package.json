@@ -46,7 +46,7 @@
   },
   "publishConfig": {
     "access": "public",
-    "registry": "https://npm-195115-7-1307503455.sh.run.tcloudbase.com/"
+    "registry": "https://npm.zengchaowu.com/"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
