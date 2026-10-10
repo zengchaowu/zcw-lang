@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { withBase } from 'vitepress'
 import { CwButton } from '@zengchaowu/vue-ui/CwButton'
+import { CwGrid } from '@zengchaowu/vue-ui/CwGrid'
+import type { CwGridBreakpointConfig } from '@zengchaowu/vue-ui/CwGrid'
 import { CwCard } from '@zengchaowu/vue-ui/CwCard'
 import { CwFeatureCardGrid } from '@zengchaowu/vue-ui/CwFeatureCardGrid'
 import { CwIcon } from '@zengchaowu/vue-ui/CwIcon'
@@ -54,6 +56,12 @@ const featureItems: CwFeatureCardItem[] = [
     iconBgColor: 'color-mix(in srgb, var(--brand-color-6) 12%, transparent)',
   },
 ]
+
+/** 对齐原 gap-4 / md:grid-cols-3（容器宽度） */
+const exampleGridBreakpoints: CwGridBreakpointConfig = {
+  xs: { columns: 1 },
+  md: { columns: 3 },
+}
 
 const examples = [
   {
@@ -159,10 +167,11 @@ function navigate(path: string) {
         </p>
       </div>
 
-      <div class="grid gap-4 md:grid-cols-3">
+      <CwGrid :breakpoints="exampleGridBreakpoints" :gutter="16" :row-gap="16">
         <CwCard
           v-for="item in examples"
           :key="item.title"
+          class="w-full min-w-0"
           appearance="section"
           :show-header-divider="false"
         >
@@ -171,7 +180,7 @@ function navigate(path: string) {
           </template>
           <pre class="overflow-x-auto rounded-lg bg-[var(--bg-color-secondarycontainer)] p-3 text-xs leading-relaxed text-[var(--text-color-primary)]"><code>{{ item.code }}</code></pre>
         </CwCard>
-      </div>
+      </CwGrid>
     </section>
 
     <!-- Install -->
