@@ -5,7 +5,7 @@ import Playground from '../components/Playground.vue'
 import './custom.css'
 import '@zengchaowu/vue-ui/dist/tailwind.css'
 import '@zengchaowu/vue-ui/dist/tokens.css'
-import '@zengchaowu/vue-ui/dist/iconfont.css'
+import '@zengchaowu/vue-ui/dist/asset.css'
 
 export default {
   extends: DefaultTheme,
