@@ -178,7 +178,7 @@ function publishToNpm(tag?: string) {
   const publishName = packageJson.publish?.name
   
   // 构建发布命令
-  const publishCommand = tag ? `npm publish --tag ${tag}` : 'npm publish'
+  const publishCommand = tag ? `pnpm publish --tag ${tag}` : 'pnpm publish'
   
   // 执行发布的通用函数
   const executePublish = () => {
